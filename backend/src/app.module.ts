@@ -5,11 +5,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import * as dotenv from 'dotenv';
 
 const envConfig = dotenv.config().parsed;
-console.log(envConfig,'---envconfig');
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/nest'),
+    MongooseModule.forRoot(envConfig.DB),
   ],
   controllers: [AppController],
   providers: [AppService],
