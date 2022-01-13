@@ -8,6 +8,7 @@ import { LoginModule } from './login/login.module';
 import { SignupModule } from './signup/signup.module';
 import { HeaderModule } from './header/header.module';
 import { FooterModule } from './footer/footer.module';
+import { LandingPageModule } from './landing-page/landing-page.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FooterModule } from './footer/footer.module';
     LoginModule,
     SignupModule,
     HeaderModule,
-    FooterModule
+    FooterModule,
+    LandingPageModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

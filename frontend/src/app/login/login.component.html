@@ -1,1 +1,45 @@
-<p>login works!</p>
+<mat-card>
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <mat-label>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="Email"
+            formControlName="email"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="hasError(form, 'email', 'required')"
+            >{{ error.requiredError.email }}
+          </mat-error>
+        </mat-form-field>
+        
+      </mat-label>
+      <mat-label>
+        <mat-form-field>
+          <input
+            type="password"
+            matInput
+            placeholder="Password"
+            formControlName="password"
+            autocomplete="off"
+          />
+
+          <mat-error *ngIf="hasError(form, 'password', 'required')">
+            {{ error.requiredError.password }}</mat-error
+          >
+          <mat-error *ngIf="hasError(form, 'password', 'minlength')">
+            {{ error.patternError.password }}</mat-error
+          >
+        </mat-form-field>
+        
+      </mat-label>
+
+      <div class="button text-center">
+        <button type="submit" mat-raised-button color="primary" [style.cursor]="!form.valid ? 'not-allowed' : 'pointer' " [disabled]="!form.valid">Login</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,1 +1,91 @@
-<p>signup works!</p>
+<mat-card>
+  <mat-card-title>Sign-Up</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <mat-label>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="First Name"
+            formControlName="firstName"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="hasError(form, 'firstName', 'required')"
+            >{{ error.requiredError.firstName }}
+          </mat-error>
+        </mat-form-field>
+      </mat-label>
+
+      <mat-label>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="Last Name"
+            formControlName="lastName"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="hasError(form, 'lastName', 'required')"
+            >{{ error.requiredError.lastName }}
+          </mat-error>
+        </mat-form-field>
+      </mat-label>
+
+      <mat-label>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="Email"
+            formControlName="email"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="hasError(form, 'email', 'required')"
+            >{{ error.requiredError.email }}
+          </mat-error>
+        </mat-form-field>
+      </mat-label>
+
+      <mat-label>
+        <mat-form-field>
+          <input
+            type="password"
+            matInput
+            placeholder="Password"
+            formControlName="password"
+            autocomplete="off"
+          />
+
+          <mat-error *ngIf="hasError(form, 'password', 'required')">
+            {{ error.requiredError.password }}</mat-error
+          >
+          <mat-error *ngIf="hasError(form, 'password', 'minlength')">
+            {{ error.patternError.password }}</mat-error
+          >
+        </mat-form-field>
+      </mat-label>
+
+      <mat-label>
+        <mat-form-field>
+          <input
+            type="number"
+            matInput
+            placeholder="Mobile"
+            formControlName="mobile"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="hasError(form, 'mobile', 'required')">{{ error.requiredError.mobile }}</mat-error>
+          <mat-error *ngIf="!hasError(form, 'mobile', 'required') && hasError(form, 'mobile', 'pattern')">{{
+            error.patternError.mobile
+          }}</mat-error>
+        </mat-form-field>
+      </mat-label>
+
+      <div class="button text-center">
+        <button type="submit" mat-raised-button color="primary" [style.cursor]="!form.valid ? 'not-allowed' : 'pointer' " [disabled]="!form.valid">Register</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
