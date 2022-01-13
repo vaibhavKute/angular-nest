@@ -14,6 +14,10 @@
           <mat-error *ngIf="hasError(form, 'email', 'required')"
             >{{ error.requiredError.email }}
           </mat-error>
+
+          <mat-error *ngIf="hasError(form, 'email', 'pattern')"
+            >{{ error.patternError.email }}
+          </mat-error>
         </mat-form-field>
         
       </mat-label>
