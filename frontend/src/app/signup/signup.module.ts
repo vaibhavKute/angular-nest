@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const routes: Routes = [{ path: 'sign-up', component: SignupComponent }];
@@ -27,7 +28,8 @@ const routes: Routes = [{ path: 'sign-up', component: SignupComponent }];
     MatFormFieldModule,
     MatIconModule,
     MatSnackBarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class SignupModule { }
