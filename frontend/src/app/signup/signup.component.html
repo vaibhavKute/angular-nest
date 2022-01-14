@@ -94,7 +94,8 @@
       </mat-label>
 
       <div class="button text-center">
-        <button type="submit" mat-raised-button color="primary" [style.cursor]="!form.valid ? 'not-allowed' : 'pointer' " [disabled]="!form.valid">Register</button>
+        <button type="submit" class="signup-btn" mat-raised-button color="primary" [style.cursor]="!form.valid ? 'not-allowed' : 'pointer' " [disabled]="!form.valid">Register</button>
+        <button type="submit" class="login-btn" mat-raised-button color="primary" routerLink="/auth/login">Login</button>
       </div>
     </form>
   </mat-card-content>

@@ -26,7 +26,7 @@ let AuthService = class AuthService {
             return signup;
         }
         catch (error) {
-            throw new common_1.BadRequestException(error);
+            throw new common_1.BadRequestException(JSON.stringify(error.error));
         }
     }
 };

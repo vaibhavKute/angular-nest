@@ -6,8 +6,7 @@
 
 .mat-form-field {
   width: 100%;
-
-  padding-top: 20px;
+  padding-top: 15px;
 }
 
 mat-card-title,
@@ -32,4 +31,12 @@ mat-card-content {
 ::ng-deep .success-style {
   background-color: green;
   color: #fff;
+}
+
+.signup-btn{
+  right: 30px;
+}
+
+.login-btn{
+  left: 30px;
 }

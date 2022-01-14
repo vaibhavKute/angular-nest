@@ -14,7 +14,7 @@ export class AuthService {
             return signup;
         }
         catch(error){
-            throw new BadRequestException(error);
+            throw new BadRequestException(JSON.stringify(error.error));
         }
         
     }

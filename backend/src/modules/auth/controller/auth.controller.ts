@@ -20,10 +20,7 @@ export class AuthController {
             });
         }
         catch(error){
-            throw new BadRequestException({
-                message: "User has validation error",
-                error
-            });
+            throw new BadRequestException(error.response);
         }
     }
 

@@ -28,6 +28,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^5.1.5",
     "axios": "^0.24.0",
+    "circular-json": "^0.5.9",
     "dotenv": "^10.0.0",
     "mongoose": "^6.1.5",
     "mongoose-extend-schema": "^1.0.0",

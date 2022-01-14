@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
     }
  
     this.signUpData = this.form.value;
-    this.httpService.getSignUpData(this.snackBar).subscribe((res)=>{
+    this.httpService.getSignUpData(this.signUpData).subscribe((res)=>{
       this.apiResMessage = res['message'];
       if(res){
         this.snackBar.open(this.apiResMessage,'Done',{
@@ -55,7 +55,17 @@ export class SignupComponent implements OnInit {
       this.form.reset();
       this.getAllValidators();
     },
-    );
+    (error)=>{
+      if(error){
+        this.snackBar.open('Internal Server Error','Done',{
+          duration: 5000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: ['error-style'],
+        });
+      }
+    });
+
   }
 
   getAllValidators(){

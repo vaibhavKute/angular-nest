@@ -32,10 +32,7 @@ let AuthController = class AuthController {
             });
         }
         catch (error) {
-            throw new common_1.BadRequestException({
-                message: "User has validation error",
-                error
-            });
+            throw new common_1.BadRequestException(error.response);
         }
     }
 };
