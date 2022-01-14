@@ -41,7 +41,24 @@ export class AuthController {
             });
         }
         catch(error){
-            throw new BadRequestException(error.response);
+            throw new BadRequestException(error);
+        }
+    }
+
+    @Get('/all-users')
+    async getAllUsers(@Res() res){
+        try{
+            const fetchAllUsers = await this.authService.getAllUsers();
+
+            if(!fetchAllUsers) throw new BadRequestException('Users not found');
+
+            return res.status(HttpStatus.OK).json({
+                message: 'All Users',
+                fetchAllUsers,
+            })
+        }
+        catch(error){
+            throw new BadRequestException(error);
         }
     }
 

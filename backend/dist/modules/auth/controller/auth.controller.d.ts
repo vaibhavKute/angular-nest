@@ -4,4 +4,5 @@ export declare class AuthController {
     private authService;
     constructor(authService: AuthService);
     signUp(res: any, authDto: AuthDto): Promise<any>;
+    getAllUsers(res: any): Promise<any>;
 }

@@ -49,7 +49,21 @@ let AuthController = class AuthController {
             });
         }
         catch (error) {
-            throw new common_1.BadRequestException(error.response);
+            throw new common_1.BadRequestException(error);
+        }
+    }
+    async getAllUsers(res) {
+        try {
+            const fetchAllUsers = await this.authService.getAllUsers();
+            if (!fetchAllUsers)
+                throw new common_1.BadRequestException('Users not found');
+            return res.status(common_1.HttpStatus.OK).json({
+                message: 'All Users',
+                fetchAllUsers,
+            });
+        }
+        catch (error) {
+            throw new common_1.BadRequestException(error);
         }
     }
 };
@@ -61,6 +75,13 @@ __decorate([
     __metadata("design:paramtypes", [Object, auth_dto_1.AuthDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "signUp", null);
+__decorate([
+    (0, common_1.Get)('/all-users'),
+    __param(0, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "getAllUsers", null);
 AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
