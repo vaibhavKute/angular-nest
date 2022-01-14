@@ -22,7 +22,24 @@ let AuthController = class AuthController {
     }
     async signUp(res, authDto) {
         try {
-            const response = await this.authService.signUp(authDto);
+            const getUser = await this.authService.getAllUsers();
+            const authDtoEmail = authDto['email'];
+            const checEmail = getUser.map((ele) => {
+                const filepath = {
+                    originalname: ele.email,
+                };
+                if (authDtoEmail === filepath.originalname) {
+                    throw new common_1.BadRequestException('Email already exists');
+                }
+            });
+            let dtoObj = {
+                firstName: authDto['firstName'],
+                lastName: authDto['lastName'],
+                email: authDto['email'],
+                password: authDto['password'],
+                mobile: authDto['mobile']
+            };
+            const response = await this.authService.signUp(dtoObj);
             if (!response) {
                 throw new common_1.BadRequestException('User not found');
             }

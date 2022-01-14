@@ -29,6 +29,15 @@ let AuthService = class AuthService {
             throw new common_1.BadRequestException(JSON.stringify(error.error));
         }
     }
+    async getAllUsers() {
+        try {
+            const getUsers = await this.authModel.find().exec();
+            return getUsers;
+        }
+        catch (error) {
+            throw new common_1.BadRequestException(error);
+        }
+    }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),

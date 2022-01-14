@@ -18,4 +18,14 @@ export class AuthService {
         }
         
     }
+
+    async getAllUsers(){
+        try{
+            const getUsers = await this.authModel.find().exec();
+            return getUsers;
+        }
+        catch(error){
+            throw new BadRequestException(error)
+        }
+    }
 }

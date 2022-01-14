@@ -19,6 +19,7 @@ export class SignupComponent implements OnInit {
   form: FormGroup;
   error = errors;
   hasError = hasErrors;
+  errorMessage;
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -56,8 +57,11 @@ export class SignupComponent implements OnInit {
       this.getAllValidators();
     },
     (error)=>{
-      if(error){
-        this.snackBar.open('Internal Server Error','Done',{
+      console.log(error,'----error')
+      if(error && error.error){
+        const errorMsg = error.error.message
+        this.errorMessage = error.message
+        this.snackBar.open(error.error.message ? errorMsg : this.errorMessage,'Done',{
           duration: 5000,
           verticalPosition: 'top',
           horizontalPosition: 'right',

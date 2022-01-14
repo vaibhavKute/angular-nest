@@ -6,4 +6,7 @@ export declare class AuthService {
     signUp(authDto: any): Promise<Auth & {
         _id: any;
     }>;
+    getAllUsers(): Promise<(Auth & {
+        _id: any;
+    })[]>;
 }
