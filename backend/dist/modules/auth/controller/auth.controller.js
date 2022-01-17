@@ -71,7 +71,7 @@ let AuthController = class AuthController {
         try {
             const getUser = await this.authService.getSingleUser(loginObj.email);
             if (!getUser)
-                throw new common_1.BadRequestException('Invalid Email');
+                throw new common_1.BadRequestException('Invalid EmailId or Password');
             if (loginObj.email === getUser.email && loginObj.password === getUser.password) {
                 return res.status(common_1.HttpStatus.OK).json({
                     message: 'User has been logged in sucessfully',
@@ -79,7 +79,7 @@ let AuthController = class AuthController {
                 });
             }
             else if (loginObj.email === getUser.email && loginObj.password !== getUser.password) {
-                return res.status(common_1.HttpStatus.OK).json({
+                return res.status(common_1.HttpStatus.BAD_REQUEST).json({
                     message: 'Invalid Password',
                 });
             }

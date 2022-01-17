@@ -27,3 +27,17 @@ mat-card-content {
 .login-btn{
   right: 10px;
 }
+
+::ng-deep .error-style {
+  background-color: rgb(236, 17, 17);
+  color: #fff;
+}
+
+::ng-deep .mat-simple-snackbar-action {
+  background-color: rgb(255, 255, 255);
+}
+
+::ng-deep .success-style {
+  background-color: green;
+  color: #fff;
+}

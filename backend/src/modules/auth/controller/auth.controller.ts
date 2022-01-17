@@ -67,7 +67,7 @@ export class AuthController {
     async login(@Res() res, @Body() loginObj){
         try{
             const getUser = await this.authService.getSingleUser(loginObj.email);
-            if(!getUser) throw new BadRequestException('Invalid Email');
+            if(!getUser) throw new BadRequestException('Invalid EmailId or Password');
 
             if(loginObj.email === getUser.email && loginObj.password === getUser.password){
                 return res.status(HttpStatus.OK).json({
@@ -75,7 +75,7 @@ export class AuthController {
                     getUser
                 });
             } else if(loginObj.email === getUser.email && loginObj.password !== getUser.password){
-                return res.status(HttpStatus.OK).json({
+                return res.status(HttpStatus.BAD_REQUEST).json({
                     message: 'Invalid Password',
                 });
             } else {

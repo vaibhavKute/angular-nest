@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SIGN_UP } from '../interfaces/api-endpoints';
+import { LOGIN, SIGN_UP } from '../interfaces/api-endpoints';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,5 +13,9 @@ export class ApiServicesService {
 
   getSignUpData(data){
     return this.http.post(this.baseURL + SIGN_UP, data);
+  }
+
+  getLoginData(data){
+    return this.http.post(this.baseURL + LOGIN, data);
   }
 }
