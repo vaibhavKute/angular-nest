@@ -69,7 +69,37 @@ let AuthController = class AuthController {
     }
     async login(res, loginObj) {
         try {
-            console.log(loginObj, '---loginObj');
+            const getUser = await this.authService.getSingleUser(loginObj.email);
+            if (!getUser)
+                throw new common_1.BadRequestException('Invalid Email');
+            if (loginObj.email === getUser.email && loginObj.password === getUser.password) {
+                return res.status(common_1.HttpStatus.OK).json({
+                    message: 'User has been logged in sucessfully',
+                    getUser
+                });
+            }
+            else if (loginObj.email === getUser.email && loginObj.password !== getUser.password) {
+                return res.status(common_1.HttpStatus.OK).json({
+                    message: 'Invalid Password',
+                });
+            }
+            else {
+                throw new common_1.BadRequestException('Error Occured');
+            }
+        }
+        catch (error) {
+            throw new common_1.BadRequestException(error);
+        }
+    }
+    async singleUser(res, emailId) {
+        try {
+            const oneUser = await this.authService.getSingleUser(emailId);
+            if (!oneUser)
+                throw new common_1.BadRequestException('User not found');
+            return res.status(common_1.HttpStatus.OK).json({
+                message: 'Single User',
+                oneUser
+            });
         }
         catch (error) {
             throw new common_1.BadRequestException(error);
@@ -96,9 +126,17 @@ __decorate([
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, login_dto_1.loginDto]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
+__decorate([
+    (0, common_1.Get)(':emailId'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('emailId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, login_dto_1.loginDto]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "singleUser", null);
 AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

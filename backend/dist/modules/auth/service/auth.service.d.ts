@@ -9,4 +9,5 @@ export declare class AuthService {
     getAllUsers(): Promise<(Auth & {
         _id: any;
     })[]>;
+    getSingleUser(emailId: any): Promise<Auth>;
 }

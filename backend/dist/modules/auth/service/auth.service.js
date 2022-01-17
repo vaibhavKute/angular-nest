@@ -38,6 +38,15 @@ let AuthService = class AuthService {
             throw new common_1.BadRequestException(error);
         }
     }
+    async getSingleUser(emailId) {
+        try {
+            const singleUser = await this.authModel.findOne({ email: emailId }).exec();
+            return singleUser;
+        }
+        catch (error) {
+            throw new common_1.BadRequestException(error);
+        }
+    }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),

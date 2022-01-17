@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { loginDto } from '../dto/login-dto';
 import { Auth } from '../interface/auth-interface';
 
 @Injectable()
@@ -26,6 +27,16 @@ export class AuthService {
         }
         catch(error){
             throw new BadRequestException(error)
+        }
+    }
+
+    async getSingleUser(emailId): Promise<Auth>{
+        try{
+            const singleUser = await this.authModel.findOne({email: emailId}).exec();
+            return singleUser;
+        }
+        catch(error){
+            throw new BadRequestException(error);
         }
     }
 }

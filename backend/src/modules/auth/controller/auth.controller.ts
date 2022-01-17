@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, HttpCode, HttpStatus, Post, Res } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Res } from '@nestjs/common';
 import { AuthDto } from '../dto/auth-dto';
 import { loginDto } from '../dto/login-dto';
 import { AuthService } from '../service/auth.service';
@@ -64,9 +64,39 @@ export class AuthController {
     }
 
     @Post('/login')
-    async login(@Res() res, @Body() loginObj: loginDto){
+    async login(@Res() res, @Body() loginObj){
         try{
-            console.log(loginObj,'---loginObj')
+            const getUser = await this.authService.getSingleUser(loginObj.email);
+            if(!getUser) throw new BadRequestException('Invalid Email');
+
+            if(loginObj.email === getUser.email && loginObj.password === getUser.password){
+                return res.status(HttpStatus.OK).json({
+                    message: 'User has been logged in sucessfully',
+                    getUser
+                });
+            } else if(loginObj.email === getUser.email && loginObj.password !== getUser.password){
+                return res.status(HttpStatus.OK).json({
+                    message: 'Invalid Password',
+                });
+            } else {
+                throw new BadRequestException('Error Occured');
+            }
+        }
+        catch(error){
+            throw new BadRequestException(error);
+        }
+    }
+
+    @Get(':emailId')
+    async singleUser(@Res() res, @Param('emailId') emailId: loginDto){
+        try{
+            const oneUser = await this.authService.getSingleUser(emailId);
+            if(!oneUser) throw new BadRequestException('User not found')
+
+            return res.status(HttpStatus.OK).json({
+                message: 'Single User',
+                oneUser
+            })
         }
         catch(error){
             throw new BadRequestException(error);
