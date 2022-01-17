@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   errorMsg;
   errorMessage;
   responseMessage;
+  hide = true;
 
   constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private httpService: ApiServicesService, private router: Router) { }
 
