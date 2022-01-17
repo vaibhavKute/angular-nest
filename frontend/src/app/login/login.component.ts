@@ -4,6 +4,7 @@ import { validationType, errors } from 'src/common/constants/error.model';
 import { hasErrors } from 'src/common/interfaces/utilities.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiServicesService } from 'src/common/services/api-services.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   errorMessage;
   responseMessage;
 
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private httpService: ApiServicesService) { }
+  constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private httpService: ApiServicesService, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -54,6 +55,7 @@ export class LoginComponent implements OnInit {
       }
       this.form.reset();
       this.getAllValidators();
+      this.router.navigate(['/home/homePage']);
 
     },(error)=>{
       if(error){

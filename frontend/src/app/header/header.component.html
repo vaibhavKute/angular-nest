@@ -1,1 +1,17 @@
-<p>header works!</p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <div>
+        <span class="my-app">My App</span>
+    </div>
+    
+    <!-- <span class="example-spacer"></span> -->
+
+    <div>
+        <button class="button users-list" mat-button (click)="users()">Users</button>
+    </div>
+    <!-- <span class="example-spacer"></span> -->
+  </mat-toolbar-row>
+</mat-toolbar>
