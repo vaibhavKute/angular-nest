@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users.component';
 import { RouterModule, Routes } from '@angular/router';
+import { MatTableModule } from '@angular/material/table'; 
 
 const routes: Routes = [{ path: 'users', component: UsersComponent }];
 
@@ -12,7 +13,8 @@ const routes: Routes = [{ path: 'users', component: UsersComponent }];
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatTableModule
   ]
 })
 export class UsersModule { }
