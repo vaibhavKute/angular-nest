@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { UserTableData } from 'src/common/interfaces/userTable.model';
+import { ApiServicesService } from 'src/common/services/api-services.service';
 
 export interface PeriodicElement {
   name: string;
@@ -28,12 +31,41 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class UsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  allUsers;
+  userId;
+  userFirstName;
+  userLastName;
+  userEmail;
+  displayedColumns: string[] = ['position', 'id', 'firstName', 'lastName', 'email', 'actions'];
+  dataSource: MatTableDataSource<UserTableData>;
 
-  constructor() { }
+  constructor(private httpService: ApiServicesService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.tableData();
+  }
+
+  tableData(){
+    this.httpService.getAllUsers().subscribe((res)=>{
+      this.allUsers = res['fetchAllUsers'];
+      console.log(this.allUsers,'---allUsers')
+      const userData = this.allUsers.forEach((ele)=>{
+        this.userId = ele._id;
+        this.userFirstName = ele.firstName;
+        this.userLastName = ele.lastName;
+        this.userEmail = ele.email;
+      })
+      this.dataSource = new MatTableDataSource(this.allUsers);
+      this.cdr.detectChanges();
+      console.log(this.dataSource,'---datasource')
+
+    },(error)=>{
+      console.log(error,'---error')
+    })
+  }
+
+  deletebtn(ele){
+    console.log(ele,'-----ele')
   }
 
 }
