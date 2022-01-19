@@ -103,10 +103,10 @@ export class AuthController {
         }
     }
 
-    @Delete(':emailId')
-    async deleteUser(@Res() res, @Param('emailId') emailId: loginDto){
+    @Delete('delete/:userId')
+    async deleteUser(@Res() res, @Param('userId') userId: loginDto){
         try{
-            const deletedUser = await this.authService.deleteUser(emailId);
+            const deletedUser = await this.authService.deleteUser(userId);
             if(!deletedUser) throw new BadRequestException('User not found');
 
             return res.status(HttpStatus.OK).json({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LOGIN, SIGN_UP, USERS_DATA } from '../interfaces/api-endpoints';
+import { DELETE_USERS, LOGIN, SIGN_UP, USERS_DATA } from '../interfaces/api-endpoints';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -21,5 +21,9 @@ export class ApiServicesService {
 
   getAllUsers(){
     return this.http.get(this.baseURL + USERS_DATA);
+  }
+  
+  deleteUsers(data){
+    return this.http.delete(this.baseURL + DELETE_USERS + data);
   }
 }

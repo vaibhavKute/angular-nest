@@ -10,7 +10,7 @@ export declare class AuthService {
         _id: any;
     })[]>;
     getSingleUser(emailId: any): Promise<Auth>;
-    deleteUser(emailId: any): Promise<Auth & {
+    deleteUser(userId: any): Promise<Auth & {
         _id: any;
     }>;
 }

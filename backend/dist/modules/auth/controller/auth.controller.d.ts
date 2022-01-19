@@ -8,5 +8,5 @@ export declare class AuthController {
     getAllUsers(res: any): Promise<any>;
     login(res: any, loginObj: any): Promise<any>;
     singleUser(res: any, emailId: loginDto): Promise<any>;
-    deleteUser(res: any, emailId: loginDto): Promise<any>;
+    deleteUser(res: any, userId: loginDto): Promise<any>;
 }

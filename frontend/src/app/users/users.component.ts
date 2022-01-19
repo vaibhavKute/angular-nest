@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserTableData } from 'src/common/interfaces/userTable.model';
 import { ApiServicesService } from 'src/common/services/api-services.service';
@@ -39,7 +40,7 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['position', 'id', 'firstName', 'lastName', 'email', 'actions'];
   dataSource: MatTableDataSource<UserTableData>;
 
-  constructor(private httpService: ApiServicesService, private cdr: ChangeDetectorRef) { }
+  constructor(private httpService: ApiServicesService, private cdr: ChangeDetectorRef, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.tableData();
@@ -48,7 +49,6 @@ export class UsersComponent implements OnInit {
   tableData(){
     this.httpService.getAllUsers().subscribe((res)=>{
       this.allUsers = res['fetchAllUsers'];
-      console.log(this.allUsers,'---allUsers')
       const userData = this.allUsers.forEach((ele)=>{
         this.userId = ele._id;
         this.userFirstName = ele.firstName;
@@ -57,15 +57,37 @@ export class UsersComponent implements OnInit {
       })
       this.dataSource = new MatTableDataSource(this.allUsers);
       this.cdr.detectChanges();
-      console.log(this.dataSource,'---datasource')
-
     },(error)=>{
-      console.log(error,'---error')
+      this.snackBar.open(error.message, 'Ok', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        panelClass: ['error-style'],
+        duration: 3000,
+      });
     })
   }
 
-  deletebtn(ele){
-    console.log(ele,'-----ele')
+  deletebtn(ele,index){
+    const userId = ele._id;
+    this.httpService.deleteUsers(userId).subscribe((res=>{
+      if(res){
+        this.allUsers.splice(index, 1);
+        this.tableData();
+        this.snackBar.open(`${ele?.firstName + ' ' + ele?.lastName} Deleted from the list!`, 'Ok', {
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: ['error-style'],
+          duration: 3000,
+        });
+      }
+    }),(error=>{
+      this.snackBar.open(error.error.message, 'Ok', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        panelClass: ['error-style'],
+        duration: 3000,
+      });
+    }))
   }
 
 }

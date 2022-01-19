@@ -40,9 +40,9 @@ export class AuthService {
         }
     }
 
-    async deleteUser(emailId){
+    async deleteUser(userId){
         try{    
-            const deletedUser = await this.authModel.findOneAndDelete({email: emailId});
+            const deletedUser = await this.authModel.findOneAndDelete({_id: userId});
             return deletedUser;
         }
         catch(error){
