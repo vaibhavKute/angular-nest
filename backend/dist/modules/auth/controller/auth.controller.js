@@ -105,6 +105,20 @@ let AuthController = class AuthController {
             throw new common_1.BadRequestException(error);
         }
     }
+    async deleteUser(res, emailId) {
+        try {
+            const deletedUser = await this.authService.deleteUser(emailId);
+            if (!deletedUser)
+                throw new common_1.BadRequestException('User not found');
+            return res.status(common_1.HttpStatus.OK).json({
+                message: 'User deleted successfully',
+                deletedUser
+            });
+        }
+        catch (error) {
+            throw new common_1.BadRequestException(error);
+        }
+    }
 };
 __decorate([
     (0, common_1.Post)('/sign-up'),
@@ -137,6 +151,14 @@ __decorate([
     __metadata("design:paramtypes", [Object, login_dto_1.loginDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "singleUser", null);
+__decorate([
+    (0, common_1.Delete)(':emailId'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('emailId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, login_dto_1.loginDto]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "deleteUser", null);
 AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

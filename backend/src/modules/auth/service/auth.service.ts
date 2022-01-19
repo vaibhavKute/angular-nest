@@ -39,4 +39,14 @@ export class AuthService {
             throw new BadRequestException(error);
         }
     }
+
+    async deleteUser(emailId){
+        try{    
+            const deletedUser = await this.authModel.findOneAndDelete({email: emailId});
+            return deletedUser;
+        }
+        catch(error){
+            throw new BadRequestException(error);
+        }
+    }
 }

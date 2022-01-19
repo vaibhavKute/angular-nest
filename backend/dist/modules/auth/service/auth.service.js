@@ -47,6 +47,15 @@ let AuthService = class AuthService {
             throw new common_1.BadRequestException(error);
         }
     }
+    async deleteUser(emailId) {
+        try {
+            const deletedUser = await this.authModel.findOneAndDelete({ email: emailId });
+            return deletedUser;
+        }
+        catch (error) {
+            throw new common_1.BadRequestException(error);
+        }
+    }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),

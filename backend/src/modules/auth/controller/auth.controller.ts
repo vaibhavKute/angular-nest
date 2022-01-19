@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Res } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Res } from '@nestjs/common';
 import { AuthDto } from '../dto/auth-dto';
 import { loginDto } from '../dto/login-dto';
 import { AuthService } from '../service/auth.service';
@@ -96,6 +96,22 @@ export class AuthController {
             return res.status(HttpStatus.OK).json({
                 message: 'Single User',
                 oneUser
+            })
+        }
+        catch(error){
+            throw new BadRequestException(error);
+        }
+    }
+
+    @Delete(':emailId')
+    async deleteUser(@Res() res, @Param('emailId') emailId: loginDto){
+        try{
+            const deletedUser = await this.authService.deleteUser(emailId);
+            if(!deletedUser) throw new BadRequestException('User not found');
+
+            return res.status(HttpStatus.OK).json({
+                message: 'User deleted successfully',
+                deletedUser
             })
         }
         catch(error){
