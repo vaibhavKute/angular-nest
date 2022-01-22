@@ -2,10 +2,12 @@ import { BadRequestException, Body, Controller, Delete, Get, HttpCode, HttpStatu
 import { AuthDto } from '../dto/auth-dto';
 import { loginDto } from '../dto/login-dto';
 import { AuthService } from '../service/auth.service';
+import * as bcrypt from 'bcrypt';
 
 @Controller('auth')
 export class AuthController {
 
+    saltOrRounds = 10;
     constructor(private authService: AuthService){}
 
     @Post('/sign-up')
@@ -22,13 +24,16 @@ export class AuthController {
                 if(authDtoEmail === filepath.originalname){
                     throw new BadRequestException('Email already exists');
                 }
-            })
+            });
+
+            const password = authDto['password'];
+            const hashedPassword = await bcrypt.hash(password, this.saltOrRounds)
             
             let dtoObj = {
                 firstName: authDto['firstName'],
                 lastName: authDto['lastName'],
                 email: authDto['email'],
-                password: authDto['password'],
+                password: hashedPassword,
                 mobile: authDto['mobile']
             }
 
@@ -66,21 +71,36 @@ export class AuthController {
     @Post('/login')
     async login(@Res() res, @Body() loginObj){
         try{
-            const getUser = await this.authService.getSingleUser(loginObj.email);
-            if(!getUser) throw new BadRequestException('Invalid EmailId or Password');
 
-            if(loginObj.email === getUser.email && loginObj.password === getUser.password){
-                return res.status(HttpStatus.OK).json({
-                    message: 'User has been logged in sucessfully',
-                    getUser
-                });
-            } else if(loginObj.email === getUser.email && loginObj.password !== getUser.password){
-                return res.status(HttpStatus.BAD_REQUEST).json({
-                    message: 'Invalid Password',
-                });
-            } else {
-                throw new BadRequestException('Error Occured');
-            }
+            const getUser = await this.authService.validateUserByPassword(loginObj);
+
+
+            // const getUser = await this.authService.getSingleUser(loginObj.email);
+            if(!getUser) throw new BadRequestException('Invalid EmailId or Password');
+            
+            // if(!await bcrypt.compare(loginObj.password, getUser.password)){
+            //     throw new BadRequestException('Invalid EmailId or Password');
+            // }
+
+            // return getUser
+
+            // if(loginObj.email === getUser.email && loginObj.password === getUser.password){
+            //     return res.status(HttpStatus.OK).json({
+            //         message: 'User has been logged in sucessfully',
+            //         getUser
+            //     });
+            // } else if(loginObj.email === getUser.email && loginObj.password !== getUser.password){
+            //     return res.status(HttpStatus.BAD_REQUEST).json({
+            //         message: 'Invalid Password',
+            //     });
+            // } else {
+            //     throw new BadRequestException('Error Occured');
+            // }
+            return res.status(HttpStatus.OK).json({
+                message: "Login successfull!!",
+                user:getUser.user,
+                token:getUser.token
+            })
         }
         catch(error){
             throw new BadRequestException(error);

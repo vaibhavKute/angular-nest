@@ -13,6 +13,9 @@ const auth_controller_1 = require("./controller/auth.controller");
 const auth_schema_1 = require("./model/auth-schema");
 const auth_service_1 = require("./service/auth.service");
 const axios_1 = require("@nestjs/axios");
+const jwt_1 = require("@nestjs/jwt");
+const dotenv = require("dotenv");
+const envConfig = dotenv.config().parsed;
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
@@ -26,7 +29,11 @@ AuthModule = __decorate([
                     schema: auth_schema_1.authSchema
                 }
             ]),
-            axios_1.HttpModule
+            axios_1.HttpModule,
+            jwt_1.JwtModule.register({
+                secret: envConfig.SECRET_KEY,
+                signOptions: { expiresIn: '2d' },
+            }),
         ]
     })
 ], AuthModule);

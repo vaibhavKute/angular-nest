@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const auth_dto_1 = require("../dto/auth-dto");
 const login_dto_1 = require("../dto/login-dto");
 const auth_service_1 = require("../service/auth.service");
+const bcrypt = require("bcrypt");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
+        this.saltOrRounds = 10;
     }
     async signUp(res, authDto) {
         try {
@@ -33,11 +35,13 @@ let AuthController = class AuthController {
                     throw new common_1.BadRequestException('Email already exists');
                 }
             });
+            const password = authDto['password'];
+            const hashedPassword = await bcrypt.hash(password, this.saltOrRounds);
             let dtoObj = {
                 firstName: authDto['firstName'],
                 lastName: authDto['lastName'],
                 email: authDto['email'],
-                password: authDto['password'],
+                password: hashedPassword,
                 mobile: authDto['mobile']
             };
             const response = await this.authService.signUp(dtoObj);
@@ -69,23 +73,14 @@ let AuthController = class AuthController {
     }
     async login(res, loginObj) {
         try {
-            const getUser = await this.authService.getSingleUser(loginObj.email);
+            const getUser = await this.authService.validateUserByPassword(loginObj);
             if (!getUser)
                 throw new common_1.BadRequestException('Invalid EmailId or Password');
-            if (loginObj.email === getUser.email && loginObj.password === getUser.password) {
-                return res.status(common_1.HttpStatus.OK).json({
-                    message: 'User has been logged in sucessfully',
-                    getUser
-                });
-            }
-            else if (loginObj.email === getUser.email && loginObj.password !== getUser.password) {
-                return res.status(common_1.HttpStatus.BAD_REQUEST).json({
-                    message: 'Invalid Password',
-                });
-            }
-            else {
-                throw new common_1.BadRequestException('Error Occured');
-            }
+            return res.status(common_1.HttpStatus.OK).json({
+                message: "Login successfull!!",
+                user: getUser.user,
+                token: getUser.token
+            });
         }
         catch (error) {
             throw new common_1.BadRequestException(error);

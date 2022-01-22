@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   firstName;
   lastName;
   mobileNumber;
+  token;
 
   constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private httpService: ApiServicesService, private router: Router) { }
 
@@ -50,18 +51,25 @@ export class LoginComponent implements OnInit {
     }
     this.httpService.getLoginData(payload).subscribe((res)=>{
       this.responseMessage = res['message'];
-      const getData = res['getUser']
-      this.email = getData.email;
-      this.firstName = getData.firstName;
-      this.lastName = getData.lastName;
-      this.mobileNumber = getData.mobile;
-
-      localStorage.setItem('email', this.email);
-      localStorage.setItem('firstName', this.firstName);
-      localStorage.setItem('lastName', this.lastName);
-      localStorage.setItem('mobile', this.mobileNumber);
-
+      const getData = res['user'];
+      const getToken = res['token'];
+      console.log(res,'--res')
+      
       if(res){
+
+        this.email = getData.email;
+        this.firstName = getData.firstName;
+        this.lastName = getData.lastName;
+        this.mobileNumber = getData.mobile;
+        this.token = getToken.token;
+
+        localStorage.setItem('email', this.email);
+        localStorage.setItem('firstName', this.firstName);
+        localStorage.setItem('lastName', this.lastName);
+        localStorage.setItem('mobile', this.mobileNumber);
+        localStorage.setItem('token',this.token);
+
+
         this.snackBar.open(this.responseMessage, 'Done',{
           duration: 2000,
           verticalPosition: 'top',
