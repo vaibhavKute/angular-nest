@@ -7,11 +7,36 @@
       <button class="button users-list" mat-button (click)="home()">Home</button>
     </div>
     
-    <!-- <span class="example-spacer"></span> -->
-
     <div>
         <button class="button users-list" mat-button (click)="users()">Users</button>
     </div>
-    <!-- <span class="example-spacer"></span> -->
+
+    <span class="example-spacer"></span>
+
+    <span [matMenuTriggerFor]="menu" style="cursor: pointer;">
+      <mat-icon>perm_identity</mat-icon>
+    </span>
+
+    <mat-menu #menu="matMenu" class="headerMenu">
+      <button mat-menu-item (click)="openDialog()">Logout</button>
+    </mat-menu>
+
   </mat-toolbar-row>
 </mat-toolbar>
+
+
+<ng-template class="template" #logoutModal>
+  <div mat-dialog-title class="blue-gradient">
+    <div class="model-body">
+      <div class="centered">
+        <div class="d-flex bd-highlight">
+          <div class="p-2 log flex-fill bd-highlight justify-content-center">
+            <p class="bold size-20 m-0 c-black text-center">Thank you</p>
+            <h2 class="weight-500 c-grey text-center mt-2 logged">You have been logged out</h2>
+          </div>
+        </div>
+      </div>
+      <button mat-raised-button class="bg-blue BtbBox btn-ok" (click)="logout()">Okay</button>
+    </div>
+  </div>
+</ng-template>

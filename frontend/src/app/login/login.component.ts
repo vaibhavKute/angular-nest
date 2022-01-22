@@ -20,6 +20,10 @@ export class LoginComponent implements OnInit {
   errorMessage;
   responseMessage;
   hide = true;
+  email;
+  firstName;
+  lastName;
+  mobileNumber;
 
   constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private httpService: ApiServicesService, private router: Router) { }
 
@@ -46,9 +50,20 @@ export class LoginComponent implements OnInit {
     }
     this.httpService.getLoginData(payload).subscribe((res)=>{
       this.responseMessage = res['message'];
+      const getData = res['getUser']
+      this.email = getData.email;
+      this.firstName = getData.firstName;
+      this.lastName = getData.lastName;
+      this.mobileNumber = getData.mobile;
+
+      localStorage.setItem('email', this.email);
+      localStorage.setItem('firstName', this.firstName);
+      localStorage.setItem('lastName', this.lastName);
+      localStorage.setItem('mobile', this.mobileNumber);
+
       if(res){
         this.snackBar.open(this.responseMessage, 'Done',{
-          duration: 5000,
+          duration: 2000,
           verticalPosition: 'top',
           horizontalPosition: 'right',
           panelClass: ['success-style'],
