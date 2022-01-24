@@ -1,5 +1,7 @@
 <div class="container">
   <div class="row">
+    <cdk-virtual-scroll-viewport itemSize="5" [style.min-height.px]="gridHeight">
+
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="allUsers?.length !== 0">
      
       <ng-container matColumnDef="position">
@@ -51,5 +53,6 @@
       </tr>
       </tbody>
     </table>
+  </cdk-virtual-scroll-viewport>
   </div>
 </div>
