@@ -63,11 +63,11 @@ export class LoginComponent implements OnInit {
         this.mobileNumber = getData.mobile;
         this.token = getToken.token;
 
-        localStorage.setItem('email', this.email);
-        localStorage.setItem('firstName', this.firstName);
-        localStorage.setItem('lastName', this.lastName);
-        localStorage.setItem('mobile', this.mobileNumber);
-        localStorage.setItem('token',this.token);
+        sessionStorage.setItem('email', this.email);
+        sessionStorage.setItem('firstName', this.firstName);
+        sessionStorage.setItem('lastName', this.lastName);
+        sessionStorage.setItem('mobile', this.mobileNumber);
+        sessionStorage.setItem('token',this.token);
 
 
         this.snackBar.open(this.responseMessage, 'Done',{

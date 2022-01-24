@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'src/common/guards/auth.guard';
+import { LogoutGuard } from 'src/common/guards/logout.guard';
+import { LoginGuard } from 'src/common/guards/login.guard';
 
 const routes: Routes = [
   {
@@ -11,20 +12,22 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./signup/signup.module').then((m) => m.SignupModule),
+    canActivate: [LoginGuard]
   },
   {
     path: 'auth',
     loadChildren: () => import('./login/login.module').then((m) => m.LoginModule),
+    canActivate: [LoginGuard]
   },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
-    canActivate: [AuthGuard],
+    canActivate: [LogoutGuard]
   },
   {
     path: 'home',
     loadChildren: () => import('./users/users.module').then((m) => m.UsersModule),
-    canActivate: [AuthGuard],
+    canActivate: [LogoutGuard]
   },
   
 ];

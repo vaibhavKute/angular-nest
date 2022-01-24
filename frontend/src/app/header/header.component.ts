@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(){
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['/auth/login']);
     // window.location.href = EXTERNAL_LOGIN;
     this.dialog.closeAll();
