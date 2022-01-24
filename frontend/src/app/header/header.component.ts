@@ -9,10 +9,16 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  firstName;
+  lastName;
   @ViewChild('logoutModal') logoutModal: TemplateRef<any>;
   constructor(private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    console.log(sessionStorage.getItem('firstName'))
+    console.log(sessionStorage.getItem('lastName'))
+    this.firstName = sessionStorage.getItem('firstName');
+    this.lastName = sessionStorage.getItem('lastName')
   }
 
   users(){
@@ -27,6 +33,10 @@ export class HeaderComponent implements OnInit {
     this.dialog.open(this.logoutModal, {
       disableClose: true,
     });
+  }
+
+  addProduct(){
+    this.router.navigate(['/home/add-product']);
   }
 
   logout(){

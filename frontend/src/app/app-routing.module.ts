@@ -30,6 +30,11 @@ const routes: Routes = [
     canActivate: [LogoutGuard]
   },
   {
+    path: 'home',
+    loadChildren: () => import('./add-product/add-product.module').then((m) => m.AddProductModule),
+    canActivate: [LogoutGuard]
+  },
+  {
     path: '**',
     loadChildren: () => import('./page-not-found/page-not-found.module').then((m) => m.PageNotFoundModule)
   },

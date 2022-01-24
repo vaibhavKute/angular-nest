@@ -11,10 +11,18 @@
         <button class="button users-list" mat-button (click)="users()">Users</button>
     </div>
 
+    <div [matMenuTriggerFor]="products" >
+      <button class="button users-list" mat-button>Products</button>
+    </div>
+
+    <mat-menu #products="matMenu" class="headerMenu">
+      <button mat-menu-item (click)="addProduct()">Add Product</button>
+    </mat-menu>
+
     <span class="example-spacer"></span>
 
     <span [matMenuTriggerFor]="menu" style="cursor: pointer;">
-      <mat-icon>perm_identity</mat-icon>
+      <p style="padding-top: 15px;">{{firstName + ' ' + lastName}}</p>
     </span>
 
     <mat-menu #menu="matMenu" class="headerMenu">
