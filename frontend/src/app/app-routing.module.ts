@@ -29,6 +29,10 @@ const routes: Routes = [
     loadChildren: () => import('./users/users.module').then((m) => m.UsersModule),
     canActivate: [LogoutGuard]
   },
+  {
+    path: '**',
+    loadChildren: () => import('./page-not-found/page-not-found.module').then((m) => m.PageNotFoundModule)
+  },
   
 ];
 

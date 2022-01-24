@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(private router: Router){
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
-        if (event['url'] === '/auth/login' || event['url'] === '/auth/sign-up' || event['url'] === '/') {
+        if (event['url'] === '/auth/login' || event['url'] === '/auth/sign-up' || event['url'] === '/' || event['url'] === '/login') {
           this.showHead = false;
         } else {
           this.showHead = true;
