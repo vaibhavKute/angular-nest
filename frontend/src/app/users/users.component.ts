@@ -39,6 +39,7 @@ export class UsersComponent implements OnInit {
   userEmail;
   displayedColumns: string[] = ['position', 'id', 'firstName', 'lastName', 'email', 'actions'];
   dataSource: MatTableDataSource<UserTableData>;
+  gridHeight = 550;
 
   constructor(private httpService: ApiServicesService, private cdr: ChangeDetectorRef, private snackBar: MatSnackBar) { }
 
