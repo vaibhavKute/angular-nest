@@ -4,9 +4,8 @@ import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HeaderModule } from '../header/header.module';
 import { FooterModule } from '../footer/footer.module';
-import { AuthGuard } from 'src/common/guards/auth.guard';
 
-const routes: Routes = [{ path: 'homePage', component: HomeComponent, canActivate: [AuthGuard] }];
+const routes: Routes = [{ path: 'homePage', component: HomeComponent }];
 
 @NgModule({
   declarations: [
