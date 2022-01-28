@@ -1,0 +1,88 @@
+.mat-form-field {
+  width: 100%;
+  min-width: 100px;
+  padding-top: 20px;
+}
+
+.example-card {
+  height: calc(100vh - 174px) !important;
+}
+
+.tm-mt-big {
+  margin-top: 57px;
+}
+.tm-mb-big {
+  margin-bottom: 60px;
+}
+@media (max-width: 480px) {
+  .tm-mt-big {
+    margin-top: 45px;
+  }
+  .tm-mb-big {
+    margin-bottom: 45px;
+  }
+  #barChart,
+  #lineChart {
+    max-height: 350px;
+  }
+}
+.tm-bg-primary-dark {
+  background-color: #d2d2d2;
+}
+.tm-block {
+  padding: 40px;
+  -webkit-box-shadow: 1px 1px 5px 0 #455c71;
+  -moz-box-shadow: 1px 1px 5px 0 #455c71;
+  box-shadow: 1px 1px 5px 0 #455c71;
+  min-height: 350px;
+  height: 100%;
+  max-height: 450px;
+}
+@media (max-width: 991px) {
+  .tm-col-big,
+  .tm-col-small {
+    width: 100%;
+    min-height: 383px;
+    height: auto;
+  }
+  .tm-block {
+    padding: 30px;
+  }
+}
+.tm-block-h-auto {
+  min-height: 1px;
+  max-height: none;
+  height: auto;
+}
+.tm-block-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 30px;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.tm-product-img-dummy {
+  max-width: 100%;
+  //   height: 240px;
+  height: calc(58vh - 174px) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: #aaa;
+}
+.image-view {
+  width: 430px;
+  height: 250px;
+}
+html {
+  font-size: 16px;
+  overflow-x: hidden;
+}
+body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  background-color: #4e657a;
+  overflow-x: hidden;
+}

@@ -15,8 +15,6 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    console.log(sessionStorage.getItem('firstName'))
-    console.log(sessionStorage.getItem('lastName'))
     this.firstName = sessionStorage.getItem('firstName');
     this.lastName = sessionStorage.getItem('lastName')
   }

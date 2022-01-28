@@ -7,6 +7,9 @@ export const errors = {
       firstName: 'First Name is required',
       lastName: 'Last Name is required',
       mobile: 'Mobile no is Required',
+      productName: 'Product Name is Required',
+      productDescription: 'Product Description is Required',
+      productRate: 'Product Rate is Required'
     },
 
     patternError: {
@@ -15,6 +18,9 @@ export const errors = {
       firstName: 'Only characters allowed',
       lastName: 'Only characters allowed',
       mobile: 'Enter valid mobile no',
+      productName: 'Enter valid product name',
+      productDescription: 'Enter valid product description',
+      productRate: 'Enter valid product rate'
     }
 }
 
@@ -28,4 +34,7 @@ export const validationType = {
     firstName: [Validators.required, Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)],
     lastName: [Validators.required, Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)],
     mobile: [Validators.required, Validators.pattern(/^(\d{10})$/)],
+    productName: [Validators.required, Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)],
+    productDescription: [Validators.required, Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)],
+    productRate: [Validators.required, Validators.pattern(/^(\d{4})$/)],
 }
