@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <cdk-virtual-scroll-viewport itemSize="5" [style.min-height.px]="gridHeight">
+    <cdk-virtual-scroll-viewport itemSize="5" style="height: calc(100vh - 174px);">
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="allUsers?.length !== 0">
      
