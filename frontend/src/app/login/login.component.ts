@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit {
       this.responseMessage = res['message'];
       const getData = res['user'];
       const getToken = res['token'];
-      console.log(res,'--res')
       
       if(res){
 

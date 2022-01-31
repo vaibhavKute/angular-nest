@@ -86,3 +86,27 @@ body {
   background-color: #4e657a;
   overflow-x: hidden;
 }
+::ng-deep .error-style {
+  background-color: rgb(236, 17, 17);
+  color: #fff;
+}
+
+::ng-deep .mat-simple-snackbar-action {
+  background-color: rgb(255, 255, 255);
+}
+
+::ng-deep .success-style {
+  background-color: green;
+  color: #fff;
+}
+.loaderlogo {
+  position: relative;
+}
+.loader-images {
+  position: relative;
+  top: 30%;
+  p{
+    color: #fff;
+    font-weight: 500;
+  }
+}

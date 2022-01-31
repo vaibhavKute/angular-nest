@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog'; 
 
 const routes: Routes = [{ path: 'add-product', component: AddProductComponent }];
 
@@ -23,7 +24,8 @@ const routes: Routes = [{ path: 'add-product', component: AddProductComponent }]
     MatFormFieldModule,
     MatCardModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ]
 })
 export class AddProductModule { }

@@ -36,5 +36,5 @@ export const validationType = {
     mobile: [Validators.required, Validators.pattern(/^(\d{10})$/)],
     productName: [Validators.required, Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)],
     productDescription: [Validators.required, Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)],
-    productRate: [Validators.required, Validators.pattern(/^(\d{4})$/)],
+    productRate: [Validators.required, Validators.pattern(/^(\d{3})$/)],
 }

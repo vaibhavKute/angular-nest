@@ -99,7 +99,7 @@
           </div>
           <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
             <div *ngIf="!imgFile" class="tm-product-img-dummy mx-auto">
-              <input type="file" (change)="onImageChange($event)" />
+              <input type="file" #myInput (change)="onImageChange($event)" />
             </div>
             <div *ngIf="imgFile" class="tm-product-img-dummy mx-auto">
               <img [src]="imgFile" class="image-view"  />
@@ -111,3 +111,13 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #loaderDialog>
+  <div class="text-center overlay" *ngIf="isLoader">
+    <div class="loader-images">
+     <img class="loaderlogo" src="../../assets/images/loader-old.png" />
+     <p>Please wait... We are uploading file</p>
+    </div>
+  </div>
+</ng-template>
