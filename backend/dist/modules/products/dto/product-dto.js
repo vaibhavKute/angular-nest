@@ -17,7 +17,7 @@ class ProductDto extends common_dto_1.CommonDto {
 }
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsEmail)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], ProductDto.prototype, "productName", void 0);
 __decorate([

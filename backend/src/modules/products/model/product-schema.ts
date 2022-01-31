@@ -5,4 +5,5 @@ export const productSchema = extendSchema(CommonEntity, {
     productName:String,
     productDescription :String,
     productRate:Number,
+    productUrl: {type:Array},
 });

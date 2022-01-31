@@ -5,7 +5,7 @@ import { IsEmail, IsOptional, MaxLength, MinLength } from "class-validator";
 export class ProductDto extends CommonDto {
 
     @ApiProperty()
-    @IsEmail()
+    @IsOptional()
     productName: string;
 
     @ApiProperty()
