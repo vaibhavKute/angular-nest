@@ -24,7 +24,6 @@ let ProductsService = class ProductsService {
         return 'Products';
     }
     async createProduct(createProductDto) {
-        console.log(createProductDto, '---createprod in service');
         try {
             const baseURL = await this.productModel.create(createProductDto);
             return baseURL;
