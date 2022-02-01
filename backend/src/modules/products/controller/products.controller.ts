@@ -48,13 +48,13 @@ export class ProductsController {
   @Get('/all-products')
   async getAllProducts(@Res() res) {
     try {
-      const fetchAllProducts = await this.productService.getAllProducts();
+      const allProducts = await this.productService.getAllProducts();
 
-      // if(!fetchAllProducts) throw new BadRequestException('Products not found');
+      if(!allProducts) throw new BadRequestException('Products not found');
 
       return res.status(HttpStatus.OK).json({
         message: 'All Products',
-        fetchAllProducts,
+        allProducts,
       });
     } catch (error) {
       throw new BadRequestException(error);

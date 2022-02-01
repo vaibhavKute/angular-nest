@@ -12,7 +12,13 @@ export class ProductsService {
     ) {}
 
     async getAllProducts(){
-        return 'Products'
+        try{
+            const products = await this.productModel.find().exec();
+            return products;
+        }
+        catch(error){
+            throw new BadRequestException(error);
+        }
     }
 
     async createProduct(createProductDto){

@@ -41,10 +41,12 @@ let ProductsController = class ProductsController {
     }
     async getAllProducts(res) {
         try {
-            const fetchAllProducts = await this.productService.getAllProducts();
+            const allProducts = await this.productService.getAllProducts();
+            if (!allProducts)
+                throw new common_1.BadRequestException('Products not found');
             return res.status(common_1.HttpStatus.OK).json({
                 message: 'All Products',
-                fetchAllProducts,
+                allProducts,
             });
         }
         catch (error) {

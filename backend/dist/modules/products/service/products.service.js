@@ -21,7 +21,13 @@ let ProductsService = class ProductsService {
         this.productModel = productModel;
     }
     async getAllProducts() {
-        return 'Products';
+        try {
+            const products = await this.productModel.find().exec();
+            return products;
+        }
+        catch (error) {
+            throw new common_1.BadRequestException(error);
+        }
     }
     async createProduct(createProductDto) {
         try {
