@@ -44,4 +44,8 @@ export class HeaderComponent implements OnInit {
     this.dialog.closeAll();
   }
 
+  viewProduct(){
+    this.router.navigate(['/home/view-product']);
+  }
+
 }
