@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CREATE_PRODUCT, DELETE_USERS, LOGIN, SIGN_UP, USERS_DATA } from '../interfaces/api-endpoints';
+import { CREATE_PRODUCT, DELETE_USERS, LOGIN, SIGN_UP, USERS_DATA, VIEW_PRODUCT_LIST } from '../interfaces/api-endpoints';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -29,5 +29,9 @@ export class ApiServicesService {
 
   createProduct(data){
     return this.http.post(this.baseURL + CREATE_PRODUCT, data)
+  }
+
+  getAllProducts(){
+    return this.http.get(this.baseURL + VIEW_PRODUCT_LIST)
   }
 }

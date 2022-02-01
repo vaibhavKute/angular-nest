@@ -5,6 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import * as dotenv from 'dotenv';
 import { AuthModule } from './modules/auth/auth.module';
 import { ProductsModule } from './modules/products/products.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 const envConfig = dotenv.config().parsed;
 
@@ -12,7 +14,10 @@ const envConfig = dotenv.config().parsed;
   imports: [
     MongooseModule.forRoot(envConfig.DB),
     AuthModule,
-    ProductsModule
+    ProductsModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

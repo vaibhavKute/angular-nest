@@ -14,6 +14,8 @@ const mongoose_1 = require("@nestjs/mongoose");
 const dotenv = require("dotenv");
 const auth_module_1 = require("./modules/auth/auth.module");
 const products_module_1 = require("./modules/products/products.module");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 const envConfig = dotenv.config().parsed;
 let AppModule = class AppModule {
 };
@@ -22,7 +24,10 @@ AppModule = __decorate([
         imports: [
             mongoose_1.MongooseModule.forRoot(envConfig.DB),
             auth_module_1.AuthModule,
-            products_module_1.ProductsModule
+            products_module_1.ProductsModule,
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '..', 'uploads'),
+            }),
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
